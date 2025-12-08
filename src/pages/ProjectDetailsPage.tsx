@@ -38,7 +38,7 @@ function ProjectDetailsPage() {
 				console.error(error);
 			}
 		};
-		// fetchProjectTasks()
+		fetchProjectTasks()
 	}, [projectId]);
 	if (loading) return <div className="text-3xl text-white">Loading...</div>;
 
