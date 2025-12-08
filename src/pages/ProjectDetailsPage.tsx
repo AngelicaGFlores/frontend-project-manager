@@ -17,8 +17,8 @@ function ProjectDetailsPage() {
 				const res = await apiClient.get(`/api/projects/${projectId}`);
 				console.log(res.data);
 				setProject(res.data);
-		 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } catch (error: any) {
+			} catch (error: any) {
+				console.log(error);
 				setError(error.message);
 			} finally {
 				setLoading(false);
@@ -40,6 +40,10 @@ function ProjectDetailsPage() {
 		};
 		// fetchProjectTasks()
 	}, [projectId]);
+	if (loading) return <div className="text-3xl text-white">Loading...</div>;
+
+	if (error)
+		return <div className="text-3xl text-white">Error Loading Project</div>;
 
 	return (
 		<div className="text-white">
