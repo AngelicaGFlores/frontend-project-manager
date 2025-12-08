@@ -4,6 +4,6 @@ export const apiClient = axios.create({
 	baseURL: import.meta.env.VITE_BACKEND_URL,
 	headers: {
 		Authorization:
-			"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjY5MzY1NzczZGE1MjAxNWY1YTRlOWUxMyIsInVzZXJuYW1lIjoiYW5nZWxpY2FmIiwiZW1haWwiOiJhbmdlbGljYUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciJ9LCJpYXQiOjE3NjUxNjkwMjgsImV4cCI6MTc2NTE3NjIyOH0.E2jlDrtyn5c880WpjKgxtO0Ef34PoJhpQTunPd94X1k",
+			"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjY5MzcxOTA2NjBlMjUzNzI0YmJlMzRiNCIsInVzZXJuYW1lIjoiYW5nZWxpY2F1c2VyIiwiZW1haWwiOiJhbmdlbGljYTFAZ21haWwuY29tIiwicm9sZSI6InVzZXIifSwiaWF0IjoxNzY1MjE4NTg3LCJleHAiOjE3NjUyMjU3ODd9.p969End5pDe29Tx_ozKRjBETr5aMCXbXMTEI1KEd4p0",
 	},
 });
