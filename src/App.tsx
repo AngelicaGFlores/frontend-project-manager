@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage";
 import ProjectsPage from "./pages/ProjectsPage";
 import Navbar from "./components/Navbar";
 import ProjectDetailsPage from "./pages/ProjectDetailsPage";
+import AuthPage from "./pages/AuthPage";
 
 function App() {
 	return (
@@ -13,6 +14,7 @@ function App() {
 					<Route path="/" element={<HomePage />} />
 					<Route path="/projects" element={<ProjectsPage />} />
 					<Route path="/projects/:projectId" element={<ProjectDetailsPage />} />
+					<Route path="/auth" element={<AuthPage />} />
 				</Routes>
 			</div>
 		</>

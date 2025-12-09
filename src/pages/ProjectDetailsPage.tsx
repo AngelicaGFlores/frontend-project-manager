@@ -17,6 +17,7 @@ function ProjectDetailsPage() {
 				const res = await apiClient.get(`/api/projects/${projectId}`);
 				console.log(res.data);
 				setProject(res.data);
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			} catch (error: any) {
 				console.log(error);
 				setError(error.message);
@@ -29,22 +30,22 @@ function ProjectDetailsPage() {
 	}, [projectId]);
 
 	useEffect(() => {
-		const fetchProjectTasks = async () => {
-			try {
-				//const tasks = await apiClient.get(`/api/projects/${projectId}/tasks`);
-				// state
-
-				// loading error
-			} catch (error) {
-				console.error(error);
-			}
-		};
-		fetchProjectTasks()
+		// const fetchProjectTasks = async () => {
+		//     try {
+		//         const tasks = await apiClient.get(`/api/projects/${projectId}/tasks`);
+		//         // state
+		//         // loading error
+		//     } catch (error) {
+		//         console.error(error);
+		//     }
+		// }
+		// fetchProjectTasks()
 	}, [projectId]);
+
 	if (loading) return <div className="text-3xl text-white">Loading...</div>;
 
 	if (error)
-		return <div className="text-3xl text-white">Error Loading Project</div>;
+		return <div className="text-3xl text-white">Error loading Project</div>;
 
 	return (
 		<div className="text-white">
