@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
+import { useContext } from "react";
 
+import { AuthContext } from "../context/AuthProvider";
 function AuthPage() {
 	const [showRegister, setShowRegister] = useState(true);
 	const [username, setUsername] = useState("");
@@ -7,6 +9,7 @@ function AuthPage() {
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
+	const {register} = useContext(AuthContext)
 
 	const handleLogin = async () => {
 		try {
@@ -22,7 +25,8 @@ function AuthPage() {
 		}
 	};
 
-	const handleRegister = async () => {
+	const handleRegister = async (e: FormEvent) => {
+		e.preventDefault()
 		try {
 			setError("");
 			setLoading(true);
@@ -158,3 +162,4 @@ function AuthPage() {
 }
 
 export default AuthPage;
+// idk what i chnged it wass wokring here
