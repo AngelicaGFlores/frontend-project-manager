@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 import type { User } from "../types";
 import { apiClient } from "../clients/api";
 
@@ -63,7 +63,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 		username: string,
 		email: string,
 		password: string
-	) => {};
+	) => {console.log(username,email,password)};
 
 	const logOut = () => {};
 
