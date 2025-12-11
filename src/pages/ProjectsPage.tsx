@@ -7,9 +7,12 @@ function ProjectsPage() {
 	const [projects, setProjects] = useState<Project[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
+	const [updateId, setUpdateId] = useState("");
+	
 
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
+	const btnValue = updateId ? "Update Project" : "Create Project";
 
 	useEffect(() => {
 		const fetchProjects = async () => {
@@ -32,23 +35,43 @@ function ProjectsPage() {
 
 	if (loading) return <div className="text-3xl text-white">Loading...</div>;
 
-	const handleSubmit = async (e: React.FormEvent) => {
-		e.preventDefault();
 
-		try {
-			setLoading(true);
-			const res = await apiClient.post("/api/projects", { name, description });
-			setProjects((prev) => [...prev, res.data]);
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		} catch (error: any) {
-			console.error(error);
-			setError(error.message);
-		} finally {
-			setLoading(false);
-			setName("");
-			setDescription("");
-		}
+	const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+		if (updateId) {
+			try {
+				setLoading(true);
+				if (updateId) {
+					const res = await apiClient.put(`/api/projects/${updateId}`, {
+						name,
+						description,
+					});
+					setProjects((prev) =>
+						prev.map((project) => {
+							if (project._id === updateId) {
+								return res.data;
+							} else {
+								return project;
+							}
+						})
+					);
+				}
+			} catch (error: any) {
+				console.error(error);
+				setError(error.message);
+			} finally {
+				setUpdateId("");
+				setLoading(false);
+				setName("");
+				setDescription("");
+			}
+		} else { }
+
+
+		
 	};
+
+
 	return (
 		<div className="text-white">
 			<h1 className="text-4xl font-bold text-white">Projects</h1>
