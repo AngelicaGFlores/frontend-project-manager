@@ -43,14 +43,6 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 		}
 	});
 
-	// useEffect(() => {
-	//   try {
-
-	//   } catch (error) {
-	//     console.error(error);
-	//   }
-	// }, []);
-
 	const logIn = async (email: string, password: string) => {
 		const res = await apiClient.post("/api/users/login", { email, password });
 		const { token, user } = res.data;
