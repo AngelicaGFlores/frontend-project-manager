@@ -55,15 +55,26 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 		const res = await apiClient.post("/api/users/login", { email, password });
 		const { token, user } = res.data;
 
-		setUser(user)
-		setToken(token)
+		setUser(user);
+		setToken(token);
 	};
-
-	const register = async (
+	
+  const register = async (
 		username: string,
 		email: string,
 		password: string
-	) => {console.log(username,email,password)};
+	) => {
+		try {
+			const res = await apiClient.post("/api/users/register", {
+				username,
+				email,
+				password,
+			});
+			console.log(res.data);
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	const logOut = () => {};
 

@@ -1,22 +1,32 @@
-import { useState, type FormEvent } from "react";
+import React, { useState, type FormEvent } from "react";
 import { useContext } from "react";
-
 import { AuthContext } from "../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
+
 function AuthPage() {
+	const auth = useContext(AuthContext);
 	const [showRegister, setShowRegister] = useState(true);
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
-	const {register} = useContext(AuthContext)
+	const {logIn } = useContext(AuthContext)
 
-	const handleLogin = async () => {
+	const navigation = useNavigate();
+
+	if (!auth) return null;
+
+	const handleLogin = async (e: React.FormEvent) => {
+		e.preventDefault();
 		try {
 			setError("");
 			setLoading(true);
-			// api call here
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			if (!email || !password) return;
+			//api call here here
+
+			logIn(email, password);
+			navigation("/projects"); // eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (error: any) {
 			console.error(error.message);
 			setError(error.message);
@@ -26,12 +36,11 @@ function AuthPage() {
 	};
 
 	const handleRegister = async (e: FormEvent) => {
-		e.preventDefault()
+		e.preventDefault();
 		try {
 			setError("");
 			setLoading(true);
-			// api call here
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			setShowRegister(false);
 		} catch (error: any) {
 			console.error(error.message);
 			setError(error.message);
