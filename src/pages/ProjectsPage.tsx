@@ -8,7 +8,6 @@ function ProjectsPage() {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
 	const [updateId, setUpdateId] = useState("");
-	
 
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
@@ -34,10 +33,10 @@ function ProjectsPage() {
 	}, []);
 
 	if (loading) return <div className="text-3xl text-white">Loading...</div>;
-
+	//??
 
 	const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+		e.preventDefault();
 		if (updateId) {
 			try {
 				setLoading(true);
@@ -65,12 +64,38 @@ function ProjectsPage() {
 				setName("");
 				setDescription("");
 			}
-		} else { }
-
-
-		
+		} else {
+			try {
+				setLoading(true);
+				const res = await apiClient.post("/api/projects", {
+					name,
+					description,
+				});
+				setProjects((prev) => [...prev, res.data]);
+			} catch (error: any) {
+				console.error(error);
+				setError(error.message);
+			} finally {
+				setLoading(false);
+				setName("");
+				setDescription("");
+			}
+		}
 	};
 
+	//delete
+	const handleDelete = async (id: string) => {
+		try {
+			await apiClient.delete(`/api/projects/${id}`);
+			setProjects((prev) =>
+				prev.filter((project) => {
+					return project._id !== id;
+				})
+			);
+		} catch (error: any) {
+			setError(error.message);
+		}
+	};
 
 	return (
 		<div className="text-white">
@@ -97,11 +122,14 @@ function ProjectsPage() {
 					onChange={(e) => setDescription(e.target.value)}
 				/>
 
-				<input
+				<button
 					type="submit"
 					value="Create Project"
-					className="mt-auto bg-sky-500 rounded"
-				/>
+					className="mt-auto bg-sky-500 rounded">
+					{""}
+					{btnValue}
+					{""}
+				</button>
 			</form>
 
 			{error && <div>{error}</div>}
@@ -112,6 +140,16 @@ function ProjectsPage() {
 						<div
 							key={project._id}
 							className="text-white w-50 flex flex-col h-50 border border-red-500 p-2 text-center rounded">
+							<button
+								onClick={() => {
+									setUpdateId(project._id);
+									setName(project.name);
+									setDescription(project.description);
+								}}
+								className="bg-red-500 rounded mb-1"></button>
+
+							<button onClick={() => handleDelete(project._id)} />
+
 							<div className="font-bold">{project.name}</div>
 							<div>{project.description}</div>
 							<Link
