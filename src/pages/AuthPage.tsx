@@ -11,7 +11,7 @@ function AuthPage() {
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
-	const {logIn } = useContext(AuthContext)
+	const {logIn} = useContext(AuthContext)
 
 	const navigation = useNavigate();
 
